@@ -7,8 +7,6 @@ return {
 
   scrollback_lines = 20000,
 
-  window_decorations = 'TITLE|RESIZE',
-
   hyperlink_rules = {
     -- Matches: a URL in parens: (URL)
     {

@@ -90,6 +90,38 @@ local RENDER_VARIANTS = {
   { 'scircle_left', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
 }
 
+local ICONS = {
+  ['bash'] = wezterm.nerdfonts.dev_bash,
+  ['C:\\WINDOWS\\system32\\cmd.exe'] = wezterm.nerdfonts.md_console,
+  ['cargo'] = wezterm.nerdfonts.dev_rust,
+  ['cmake'] = wezterm.nerdfonts.dev_cmake,
+  ['curl'] = wezterm.nerdfonts.mdi_flattr,
+  ['docker'] = wezterm.nerdfonts.dev_docker,
+  ['docker-compose'] = wezterm.nerdfonts.dev_docker,
+  ['fish'] = wezterm.nerdfonts.md_fish,
+  ['fzf'] = wezterm.nerdfonts.cod_search_fuzzy,
+  ['git'] = wezterm.nerdfonts.dev_git,
+  ['go'] = wezterm.nerdfonts.seti_go,
+  ['ipython'] = wezterm.nerdfonts.dev_python,
+  ['journalctl'] = wezterm.nerdfonts.oct_log,
+  ['julia'] = wezterm.nerdfonts.dev_julia,
+  ['lazydocker'] = wezterm.nerdfonts.dev_docker,
+  ['lazygit'] = wezterm.nerdfonts.dev_git,
+  ['lua'] = wezterm.nerdfonts.seti_lua,
+  ['make'] = wezterm.nerdfonts.seti_makefile,
+  ['npm'] = wezterm.nerdfonts.dev_npm,
+  ['node'] = wezterm.nerdfonts.mdi_hexagon,
+  ['nvim'] = wezterm.nerdfonts.linux_neovim,
+  ['pacman'] = '󰮯 ',
+  ['pwsh.exe'] = wezterm.nerdfonts.dev_powershell,
+  ['python'] = wezterm.nerdfonts.dev_python,
+  ['ruby'] = wezterm.nerdfonts.cod_ruby,
+  ['sudo'] = wezterm.nerdfonts.fa_hashtag,
+  ['tmux'] = wezterm.nerdfonts.cod_terminal_tmux,
+  ['vim'] = wezterm.nerdfonts.dev_vim,
+  ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
+  ['zsh'] = wezterm.nerdfonts.md_console_line,
+}
 
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
@@ -118,20 +150,29 @@ local function clean_process_name(proc)
   return a:gsub('%.exe$', '')
 end
 
+--@param process_name string
+local function get_icon(process_name)
+  local a = string.match(process_name, '%a*')
+  return ICONS[a] or ''
+end
+
 ---@param process_name string
 ---@param base_title string
 ---@param max_width number
 ---@param inset number
 local function create_title(process_name, base_title, max_width, inset)
   local title
-
+  local icon
   if process_name:len() > 0 then
+    icon = get_icon(process_name)
     title = process_name .. ' ~ ' .. base_title
   else
     title = base_title
   end
-
-  if base_title == 'Debug' then
+  if icon ~= nil then
+    title = icon .. '  ' .. title
+  end
+  if base_title == 'DEBUG' then
     title = GLYPH_DEBUG .. ' DEBUG'
     inset = inset - 2
   end
