@@ -4,6 +4,8 @@ return {
   exit_behavior = 'CloseOnCleanExit', -- if the shell program exited with a successful status
   exit_behavior_messaging = 'Verbose',
   status_update_interval = 1000,
+  xim_im_name = 'fcitx',
+  use_ime = true,
 
   scrollback_lines = 20000,
 
