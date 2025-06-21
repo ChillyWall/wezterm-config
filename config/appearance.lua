@@ -18,8 +18,7 @@ return {
   cursor_blink_rate = 650,
 
   -- color scheme
-  color_scheme_dirs = { '~/.local/share/nvim/lazy/tokyonight.nvim/extras/wezterm' },
-  color_scheme = 'tokyonight_moon',
+  colors = require('colors.tokyonight-moon'),
 
   -- background
   background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
@@ -65,6 +64,4 @@ return {
     fade_out_duration_ms = 250,
     target = 'CursorColor',
   },
-
-  window_decorations = 'TITLE | RESIZE',
 }

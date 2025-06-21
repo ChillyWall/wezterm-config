@@ -9,7 +9,8 @@ return {
       family = 'FiraCode Nerd Font',
       weight = 'Medium',
     },
-    'HYZiKuTangSongKeBenLiKai',
+    'Noto Sans Mono CJK SC',
+    ---'HYZiKuTangSongKeBenLiKai',
   }),
 
   font_size = platform.is_mac and 12 or 10,
